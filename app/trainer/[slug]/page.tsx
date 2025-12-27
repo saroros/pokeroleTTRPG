@@ -341,7 +341,7 @@ const label = STATUS_LABEL[s];
           <input type="hidden" name="pokemonId" value={mon.id} />
           <button className="btn-close" type="submit">❌</button>
         </form>
-        <form action={addPokemonToFight}>
+        <form id="addfighter" action={addPokemonToFight}>
   <input type="hidden" name="trainerSlug" value={trainerSlug} />
   <input type="hidden" name="pokemonId" value={mon.id} />
   <button type="submit" title="Add to Fight">⚔️</button>
@@ -481,16 +481,18 @@ export default async function TrainerPage({
     </form>
   </div>
 </div>
-<div id="char">
-<CharacterSheetDrawer
-  trainerSlug={trainer.slug}
-  initialSheet={trainer.characterSheet}
-  initialBackstory={trainer.backstory}
-  initialFavoriteLegendary={trainer.favoriteLegendary}
-/>
+<div id="char-fight">
+  <div id="char">
+  <CharacterSheetDrawer
+    trainerSlug={trainer.slug}
+    initialSheet={trainer.characterSheet}
+    initialBackstory={trainer.backstory}
+    initialFavoriteLegendary={trainer.favoriteLegendary}
+  />
+  </div>
+  <div id="fightbtn"><Link href="/fight" target="_blank"><button type="button">⚔️ Zum Kampf</button></Link>
+  </div>
 </div>
-<Link href="/fight"><button type="button">⚔️ Zum Kampf</button></Link>
-
 <div id="add-stuff">
     <section id="addmon">
         <h2>Add Pokémon</h2>
