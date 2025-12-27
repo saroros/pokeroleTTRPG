@@ -13,7 +13,12 @@ export default async function Home() {
 
       <section style={{ marginTop: 16 }}>
         <h2>Neuer Trainer:</h2>
-        <form action={createTrainer} style={{ display: "grid", gap: 8, maxWidth: 420 }}>
+       <form
+            action={async (formData) => {
+              "use server";
+              await createTrainer(formData); // egal was createTrainer intern returned – der Wrapper returned void
+            }}
+          >
           <input name="name" placeholder="Trainer name" />
           <input name="money" type="number" placeholder="Money" defaultValue={0} />
           <textarea name="itemsNote" placeholder="Items (notes)" rows={3} />
