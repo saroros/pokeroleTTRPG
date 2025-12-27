@@ -66,8 +66,8 @@ export default function FightList({ initial }: { initial: Row[] }) {
             gap: 10,
             border: "1px solid #ccc",
             padding: "8px 10px",
-            borderRadius: 10,
-            background: "#fff",
+            borderRadius: 0,
+            background: "#0808083a",
             opacity: isPending ? 0.85 : 1,
           }}
         >
@@ -84,7 +84,7 @@ export default function FightList({ initial }: { initial: Row[] }) {
           </div>
 
           <div style={{ minWidth: 110, textAlign: "right" }}>
-            <span style={{ color: "#666" }}>Init:</span>{" "}
+            <span style={{ color: "#999" }}>Init:</span>{" "}
             <b>{r.speed ?? "-"}</b>
           </div>
 

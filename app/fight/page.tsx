@@ -28,7 +28,7 @@ export default async function FightPage() {
   });
 
   return (
-    <main style={{ padding: 16, fontFamily: "system-ui" }}>
+    <main>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1>⚔️ Fight</h1>
         <Link href="/"><button type="button">← Home</button></Link>
