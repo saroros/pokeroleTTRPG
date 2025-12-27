@@ -11,11 +11,10 @@ import {
   updateHpCurrent,
   updateLevel,
   updateStatModifier,
-  updateTrainerItems,
   updateTrainerLevel,
   incrementTrainerLevel,
-  updateTrainerMoney,
   deleteTrainer,
+  updateTrainerItemsAndMoney,
 } from "@/app/actions";
 import ItemsBox from "./ItemsBox";
 import CharacterSheetDrawer from "./CharacterSheetDrawer";
