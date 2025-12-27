@@ -508,3 +508,68 @@ export async function saveCharacterSheet(formData: FormData): Promise<void> {
 
   revalidateTrainerPages(p.trainerSlug);
 }
+
+//fight
+export async function addPokemonToFight(formData: FormData): Promise<void> {
+  const schema = z.object({
+    trainerSlug: z.string().min(1).optional(),
+    pokemonId: z.string().min(1),
+  });
+
+  const p = schema.parse({
+    trainerSlug: formData.get("trainerSlug") ?? undefined,
+    pokemonId: formData.get("pokemonId"),
+  });
+
+  await db.$transaction(async (tx) => {
+    // schon drin? -> nichts tun
+    const existing = await tx.fightEntry.findUnique({
+      where: { pokemonId: p.pokemonId },
+      select: { id: true },
+    });
+    if (existing) return;
+
+    const max = await tx.fightEntry.aggregate({
+      _max: { order: true },
+    });
+
+    const nextOrder = (max._max.order ?? 0) + 1;
+
+    await tx.fightEntry.create({
+      data: {
+        pokemonId: p.pokemonId,
+        order: nextOrder,
+      },
+    });
+  });
+
+  revalidatePath("/fight");
+  if (p.trainerSlug) revalidateTrainerPages(p.trainerSlug);
+}
+
+export async function removeFightEntry(formData: FormData): Promise<void> {
+  const schema = z.object({
+    entryId: z.string().min(1),
+  });
+
+  const p = schema.parse({
+    entryId: formData.get("entryId"),
+  });
+
+  await db.fightEntry.delete({ where: { id: p.entryId } });
+  revalidatePath("/fight");
+}
+
+export async function reorderFightEntries(entryIds: string[]): Promise<void> {
+  // Server Action mit serializable args (keine FormData nötig)
+  await db.$transaction(
+    entryIds.map((id, idx) =>
+      db.fightEntry.update({
+        where: { id },
+        data: { order: idx + 1 },
+      })
+    )
+  );
+
+  revalidatePath("/fight");
+}

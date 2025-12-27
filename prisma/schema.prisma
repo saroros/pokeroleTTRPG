@@ -14,63 +14,74 @@ enum PokemonStatus {
 
 enum ConditionStatus {
   NONE
-  BRN   // burned
-  PAR   // paralyzed
-  PSN   // poisoned
-  TOX   // badly poisoned
-  SLP   // asleep
-  FRZ   // frozen
-  FNT   // fainted/KO (optional)
+  BRN // burned
+  PAR // paralyzed
+  PSN // poisoned
+  TOX // badly poisoned
+  SLP // asleep
+  FRZ // frozen
+  FNT // fainted/KO (optional)
 }
 
 model Trainer {
   id        String   @id @default(cuid())
   name      String
   slug      String   @unique
-  editKey   String   // kept for compatibility; unused in app
+  editKey   String // kept for compatibility; unused in app
   money     Int      @default(0)
   itemsNote String   @default("")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  level     Int @default(1)
+  level     Int      @default(1)
 
-  characterSheet    Json  @default("{}")
+  characterSheet    Json   @default("{}")
   backstory         String @default("")
   favoriteLegendary String @default("")
 
-  pokemons   PokemonInstance[]
+  pokemons PokemonInstance[]
 }
 
 model PokemonInstance {
-  id          String       @id @default(cuid())
-  trainerId   String
-  trainer     Trainer      @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+  id        String  @id @default(cuid())
+  trainerId String
+  trainer   Trainer @relation(fields: [trainerId], references: [id], onDelete: Cascade)
 
-  status      PokemonStatus @default(BOX)
+  status PokemonStatus @default(BOX)
 
   speciesId   Int
   speciesName String
-  nickname    String   @default("")
-  level       Int      @default(5)
-  spriteUrl   String   @default("")
+  nickname    String @default("")
+  level       Int    @default(5)
+  spriteUrl   String @default("")
 
-  types        Json   @default("[]")
-  typeMatchups Json   @default("{}")
+  types        Json @default("[]")
+  typeMatchups Json @default("{}")
 
-  baseStats   Json
-  statMods    Json
-  diceStats   Json
+  baseStats Json
+  statMods  Json
+  diceStats Json
 
-  scaledHp    Int
-  hpMax       Int
-  hpCurrent   Int    @default(0)
+  scaledHp  Int
+  hpMax     Int
+  hpCurrent Int @default(0)
 
   moves          Json
   availableMoves Json @default("[]")
 
-  condition   ConditionStatus @default(NONE)
-  notes       String          @default("")
+  condition ConditionStatus @default(NONE)
+  notes     String          @default("")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  fightEntry FightEntry? @relation("PokemonFightEntry")
+}
+
+model FightEntry {
+  id        String   @id @default(cuid())
+  pokemonId String   @unique
+  order     Int
+  createdAt DateTime @default(now())
+
+  pokemon PokemonInstance @relation("PokemonFightEntry", fields: [pokemonId], references: [id], onDelete: Cascade)
 }

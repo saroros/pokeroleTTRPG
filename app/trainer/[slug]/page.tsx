@@ -15,7 +15,7 @@ import {
   incrementTrainerLevel,
   deleteTrainer,
   updateTrainerItemsAndMoney,
-  updatePokemonCondition, updatePokemonNotes,
+  updatePokemonCondition, updatePokemonNotes, addPokemonToFight,
 } from "@/app/actions";
 import ItemsBox from "./ItemsBox";
 import CharacterSheetDrawer from "./CharacterSheetDrawer";
@@ -341,6 +341,12 @@ const label = STATUS_LABEL[s];
           <input type="hidden" name="pokemonId" value={mon.id} />
           <button className="btn-close" type="submit">❌</button>
         </form>
+        <form action={addPokemonToFight}>
+  <input type="hidden" name="trainerSlug" value={trainerSlug} />
+  <input type="hidden" name="pokemonId" value={mon.id} />
+  <button type="submit" title="Add to Fight">⚔️</button>
+</form>
+
       </div>
       <div className="card-header">
         <div className="card-sprite">
@@ -483,6 +489,7 @@ export default async function TrainerPage({
   initialFavoriteLegendary={trainer.favoriteLegendary}
 />
 </div>
+<Link href="/fight"><button type="button">⚔️ Zum Kampf</button></Link>
 
 <div id="add-stuff">
     <section id="addmon">
