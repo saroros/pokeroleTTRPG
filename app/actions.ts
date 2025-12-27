@@ -95,7 +95,7 @@ export async function createTrainer(formData: FormData): Promise<void> {
 }
 
 
-export async function addPokemonToTrainer(formData: FormData) {
+export async function addPokemonToTrainer(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     speciesName: z.string().min(1),
@@ -160,10 +160,9 @@ const typeMatchups = await computeTypeMatchups(types);
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return created;
 }
 
-export async function movePokemonStatus(formData: FormData) {
+export async function movePokemonStatus(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     pokemonId: z.string().min(1),
@@ -194,10 +193,9 @@ export async function movePokemonStatus(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
 
-export async function updateStatModifier(formData: FormData) {
+export async function updateStatModifier(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     pokemonId: z.string().min(1),
@@ -232,10 +230,9 @@ export async function updateStatModifier(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
 
-export async function updateHpCurrent(formData: FormData) {
+export async function updateHpCurrent(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     pokemonId: z.string().min(1),
@@ -257,10 +254,9 @@ export async function updateHpCurrent(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
 
-export async function updateLevel(formData: FormData) {
+export async function updateLevel(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     pokemonId: z.string().min(1),
@@ -283,10 +279,9 @@ export async function updateLevel(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
 
-export async function addMoveManually(formData: FormData) {
+export async function addMoveManually(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     pokemonId: z.string().min(1),
@@ -327,11 +322,10 @@ export async function addMoveManually(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
 
 
-export async function removeMove(formData: FormData) {
+export async function removeMove(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     pokemonId: z.string().min(1),
@@ -354,10 +348,9 @@ export async function removeMove(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
 
-export async function deletePokemon(formData: FormData) {
+export async function deletePokemon(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     pokemonId: z.string().min(1),
@@ -373,13 +366,12 @@ export async function deletePokemon(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return deleted;
 }
 
 
 
 
-export async function updateTrainerLevel(formData: FormData) {
+export async function updateTrainerLevel(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     level: z.coerce.number().int().min(1).max(100),
@@ -396,10 +388,9 @@ export async function updateTrainerLevel(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
 
-export async function incrementTrainerLevel(formData: FormData) {
+export async function incrementTrainerLevel(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
   });
@@ -414,10 +405,9 @@ export async function incrementTrainerLevel(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
 
-export async function updateTrainerItemsAndMoney(formData: FormData) {
+export async function updateTrainerItemsAndMoney(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     itemsNote: z.string().default(""),
@@ -439,13 +429,12 @@ export async function updateTrainerItemsAndMoney(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
 
 
 
 //Character Sheet
-export async function saveCharacterSheet(formData: FormData) {
+export async function saveCharacterSheet(formData: FormData): Promise<void> {
   const schema = z.object({
     trainerSlug: z.string().min(1),
     characterSheet: z.string().default("{}"),
@@ -477,5 +466,4 @@ export async function saveCharacterSheet(formData: FormData) {
   });
 
   revalidateTrainerPages(p.trainerSlug);
-  return updated;
 }
