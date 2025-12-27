@@ -128,3 +128,5 @@ button:hover {border: 1px solid greenyellow; background: green; cursor: pointer;
 .trainerList a:hover {
   text-decoration: underline;
 }
+
+#neuertrainer form {display: grid; gap: 10px;}

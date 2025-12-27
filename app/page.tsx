@@ -13,6 +13,7 @@ export default async function Home() {
 
       <section style={{ marginTop: 16 }}>
         <h2>Neuer Trainer:</h2>
+        <div id="neuertrainer">
        <form
             action={async (formData) => {
               "use server";
@@ -24,6 +25,7 @@ export default async function Home() {
           <textarea name="itemsNote" placeholder="Items (notes)" rows={3} />
           <button type="submit">Trainer erstellen</button>
         </form>
+        </div>
       </section>
 
       <section id="uebersicht">
