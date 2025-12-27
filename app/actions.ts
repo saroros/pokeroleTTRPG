@@ -15,6 +15,7 @@ import {
 } from "@/lib/pokeapi";
 import { PokemonStatus } from "@prisma/client";
 import crypto from "crypto";
+import { redirect } from "next/navigation";
 
 function slugify(input: string) {
   return input
@@ -58,7 +59,7 @@ function revalidateTrainerPages(trainerSlug: string) {
   revalidatePath("/dm");
 }
 
-export async function createTrainer(formData: FormData) {
+export async function createTrainer(formData: FormData): Promise<void> {
   const schema = z.object({
     name: z.string().min(1),
     money: z.coerce.number().int().min(0).default(0),
@@ -72,10 +73,8 @@ export async function createTrainer(formData: FormData) {
   });
 
   const baseSlug = slugify(parsed.name) || "trainer";
-  const uniqueSlug = `${baseSlug}-${crypto.randomBytes(3).toString("hex")}`;
-
-  // Keep editKey only to satisfy existing DB schema (unused)
   const editKey = crypto.randomUUID();
+  const uniqueSlug = `${baseSlug}-${crypto.randomBytes(3).toString("hex")}`;
 
   const trainer = await db.trainer.create({
     data: {
@@ -87,10 +86,14 @@ export async function createTrainer(formData: FormData) {
     },
   });
 
+  // Home/DM Liste aktualisieren (optional)
   revalidatePath("/");
   revalidatePath("/dm");
-  return trainer;
+
+  // direkt zur Trainerseite
+  redirect(`/trainer/${trainer.slug}`);
 }
+
 
 export async function addPokemonToTrainer(formData: FormData) {
   const schema = z.object({
