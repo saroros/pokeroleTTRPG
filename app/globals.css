@@ -71,11 +71,22 @@ button:hover {border: 1px solid greenyellow; background: green; cursor: pointer;
 #mons {margin-top: 40px;}
 .mons {display: flex; flex-wrap: wrap; gap: 20px;}
 
-.pokemoncard {background: rgba(0, 0, 0, 0.5); padding: 10px 20px; flex: 1;}
-.pokemoncard button:disabled {background: rgba(255, 255, 255, 0.1); border: 1px solid green; color: white;}
+.pokemonCard {background: rgba(0, 0, 0, 0.5); padding: 10px 20px; flex: 1;}
+.pokemonCard button:disabled {background: rgba(255, 255, 255, 0.1); border: 1px solid green; color: white;}
+
 .card-header {display: flex; align-items: center;}
 .btn-close {border: 1px solid red;}
 .btn-close:hover {border: 1px solid red; background: rgba(255, 0, 0, 0.3);}
+
+.pokemonCard.condition-brn { background: rgba(255, 0, 0, 0.1); border: 1px solid red; }
+.pokemonCard.condition-par { background: rgba(255, 255, 0, 0.1); border: 1px solid yellow; }
+.pokemonCard.condition-psn { background: rgba(221, 160, 221, 0.1); border: 1px solid plum;  }
+.pokemonCard.condition-tox {background: rgba(128, 0, 128, 0.1); border: 1px solid purple; }
+.pokemonCard.condition-slp { background: rgba(168, 255, 219, 0.1); border: 1px solid rgb(168, 255, 219);  }
+.pokemonCard.condition-frz {background: rgba(0, 191, 255, 0.1); border: 1px solid rgb(0, 191, 255);  }
+.pokemonCard.condition-fnt {opacity: 0.7; border: 1px solid red;  }
+
+
 
 #stats {margin: 10px 0; padding: 10px 0; border-top: 1px solid grey;border-bottom: 1px solid grey;}
 #stats td {padding: 5px;}
@@ -90,7 +101,8 @@ button:hover {border: 1px solid greenyellow; background: green; cursor: pointer;
 
 .pokemon-name {font-size: 24px;}
 
-#typ {margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid grey;}
+#typ-cond {margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid grey; display: flex; justify-content: space-between; align-items: center;}
+#notizen {margin-top: 10px; padding-top: 10px; border-top: 1px solid grey; }
 
 #uebersicht {margin: 40px 0; padding: 40px 0; border-top: 1px solid grey;border-bottom: 1px solid grey;}
 .trainerList {
@@ -130,3 +142,4 @@ button:hover {border: 1px solid greenyellow; background: green; cursor: pointer;
 }
 
 #neuertrainer form {display: grid; gap: 10px;}
+

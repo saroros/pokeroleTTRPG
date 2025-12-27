@@ -430,6 +430,47 @@ export async function updateTrainerItemsAndMoney(formData: FormData): Promise<vo
 
   revalidateTrainerPages(p.trainerSlug);
 }
+export async function updatePokemonCondition(formData: FormData): Promise<void> {
+  const schema = z.object({
+    trainerSlug: z.string().min(1),
+    pokemonId: z.string().min(1),
+    condition: z.enum(["NONE", "BRN", "PAR", "PSN", "TOX", "SLP", "FRZ", "FNT"]),
+  });
+
+  const p = schema.parse({
+    trainerSlug: formData.get("trainerSlug"),
+    pokemonId: formData.get("pokemonId"),
+    condition: formData.get("condition"),
+  });
+
+  await db.pokemonInstance.update({
+    where: { id: p.pokemonId },
+    data: { condition: p.condition as any },
+  });
+
+  revalidateTrainerPages(p.trainerSlug);
+}
+
+export async function updatePokemonNotes(formData: FormData): Promise<void> {
+  const schema = z.object({
+    trainerSlug: z.string().min(1),
+    pokemonId: z.string().min(1),
+    notes: z.string().default(""),
+  });
+
+  const p = schema.parse({
+    trainerSlug: formData.get("trainerSlug"),
+    pokemonId: formData.get("pokemonId"),
+    notes: formData.get("notes"),
+  });
+
+  await db.pokemonInstance.update({
+    where: { id: p.pokemonId },
+    data: { notes: p.notes },
+  });
+
+  revalidateTrainerPages(p.trainerSlug);
+}
 
 
 

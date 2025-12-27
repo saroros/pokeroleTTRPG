@@ -12,6 +12,17 @@ enum PokemonStatus {
   DEAD
 }
 
+enum ConditionStatus {
+  NONE
+  BRN   // burned
+  PAR   // paralyzed
+  PSN   // poisoned
+  TOX   // badly poisoned
+  SLP   // asleep
+  FRZ   // frozen
+  FNT   // fainted/KO (optional)
+}
+
 model Trainer {
   id        String   @id @default(cuid())
   name      String
@@ -56,6 +67,9 @@ model PokemonInstance {
 
   moves          Json
   availableMoves Json @default("[]")
+
+  condition   ConditionStatus @default(NONE)
+  notes       String          @default("")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

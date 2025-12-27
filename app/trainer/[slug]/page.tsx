@@ -15,6 +15,7 @@ import {
   incrementTrainerLevel,
   deleteTrainer,
   updateTrainerItemsAndMoney,
+  updatePokemonCondition, updatePokemonNotes,
 } from "@/app/actions";
 import ItemsBox from "./ItemsBox";
 import CharacterSheetDrawer from "./CharacterSheetDrawer";
@@ -311,7 +312,7 @@ function PokemonCard({ trainerSlug, mon }: any) {
   const moves = mon.moves as any;
 
   return (
-    <div className="pokemoncard">
+    <div className={`pokemonCard condition-${(mon.condition ?? "NONE").toLowerCase()}`}>
       <div style={{ display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" }}>
         {(["ACTIVE", "BOX", "DEAD"] as const).map((s) => {
  const STATUS_LABEL: Record<"ACTIVE" | "BOX" | "DEAD", string> = {
@@ -351,8 +352,30 @@ const label = STATUS_LABEL[s];
       </div>
       
     
-
+<div id="typ-cond">
       <div id="typ"><TypeBadges types={mon.types ?? []} /></div>
+      <form action={updatePokemonCondition}>
+  <input type="hidden" name="trainerSlug" value={trainerSlug} />
+  <input type="hidden" name="pokemonId" value={mon.id} />
+
+  <select
+    key={`${mon.id}-${mon.condition ?? "NONE"}`} 
+    name="condition"
+    defaultValue={mon.condition ?? "NONE"}
+  >
+    <option value="NONE">✅</option>
+    <option value="BRN">🔥 BRN</option>
+    <option value="PAR">⚡ PAR</option>
+    <option value="PSN">☠️ POI</option>
+    <option value="TOX">🫧 TOX</option>
+    <option value="SLP">💤 SLP</option>
+    <option value="FRZ">🧊 FRZ</option>
+    <option value="FNT">💀 KO</option>
+  </select>
+  <button type="submit">Set</button>
+</form>
+
+</div>
 
       <Matchups typeMatchups={mon.typeMatchups ?? {}} />
 <div id="lvl-hp" style={{ display: "flex", gap: 40, alignItems: "center", flexWrap: "wrap" }}>
@@ -389,6 +412,20 @@ const label = STATUS_LABEL[s];
         moves={moves}
         availableMoves={mon.availableMoves}
       />
+      <div id="notizen">
+  <form action={updatePokemonNotes} style={{ display: "grid", gap: 6, marginTop: 6 }}>
+    <input type="hidden" name="trainerSlug" value={trainerSlug} />
+    <input type="hidden" name="pokemonId" value={mon.id} />
+    <textarea
+      name="notes"
+      defaultValue={mon.notes ?? ""}
+      rows={3}
+      placeholder="Notizen…"
+    />
+    <button type="submit">Save</button>
+  </form>
+</div>
+
     </div>
   );
 }
