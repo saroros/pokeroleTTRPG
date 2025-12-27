@@ -1,4 +1,3 @@
-import { StatKey } from "./rules";
 import { StatKey, diceTier, accuracyToDC } from "./rules";
 
 const POKEAPI = "https://pokeapi.co/api/v2";
@@ -41,11 +40,13 @@ export type MoveSummary = {
   name: string;
   power: number | null;
   accuracy: number | null;
-  pp: number | null;
+ accuracyDc: number | null;
+   pp: number | null;
   type: string;
   damageClass: string;
   learnedAt?: number;
     powerDice: number | null;
+    flavorText?: string | null;
 
 };
 
@@ -119,7 +120,6 @@ export async function autoPick4Moves(p: PokePokemon, level: number): Promise<Mov
         damageClass: mv.damage_class.name,
         learnedAt: m.learnedAt,
         powerDice: mv.power == null ? null : diceTier(mv.power),
-        accuracy: mv.accuracy,
         accuracyDc: accuracyToDC(mv.accuracy),
         flavorText: pickMoveHoverText(mv)
       } satisfies MoveSummary;
