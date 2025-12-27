@@ -378,7 +378,7 @@ const label = STATUS_LABEL[s];
     <option value="FRZ">🧊 FRZ</option>
     <option value="FNT">💀 KO</option>
   </select>
-  <button type="submit">Set</button>
+  <button id="margin-left" type="submit">Set</button>
 </form>
 
 </div>
@@ -397,7 +397,7 @@ const label = STATUS_LABEL[s];
               <input type="hidden" name="trainerSlug" value={trainerSlug} />
               <input type="hidden" name="pokemonId" value={mon.id} />
               <span>HP</span>
-              <input name="hpCurrent" type="number" defaultValue={mon.hpCurrent} style={{ width: 80 }} />
+              <input name="hpCurrent" type="number" defaultValue={mon.hpCurrent} style={{ width: 50 }} />
               <span>/ {mon.hpMax}</span>
               <button type="submit">Set</button>
             </form>
