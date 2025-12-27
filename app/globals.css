@@ -71,7 +71,7 @@ button:hover {border: 1px solid greenyellow; background: green; cursor: pointer;
 #mons {margin-top: 40px;}
 .mons {display: flex; flex-wrap: wrap; gap: 20px;}
 
-.pokemonCard {background: rgba(0, 0, 0, 0.5); padding: 10px 20px 20px; flex: 1; border: 1px solid black;}
+.pokemonCard {background: rgba(0, 0, 0, 0.5); padding: 10px 20px 20px; flex: 1; border: 1px solid black; max-width: 454px;}
 .pokemonCard button:disabled {background: rgba(255, 255, 255, 0.1); border: 1px solid green; color: white;}
 
 .card-header {display: flex; align-items: center;}
