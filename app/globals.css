@@ -62,9 +62,9 @@ h2 {margin-bottom: 10px;color:white; font-size: 30px;}
 #add-stuff section#addmon input, #add-stuff section#addmon select {border: 1px solid rgb(255, 94, 54);}
 #add-stuff section#items-container {flex:3; margin: 0;border: 2px solid rgb(121, 190, 255); background: rgba(121, 190, 255,.1);}
 
-input, select, textarea {border: 1px solid rgb(255, 255, 255); background: rgba(0, 0, 0, 0.8); padding: 5px;font-family: "Jersey 10", sans-serif; font-size: 20px;}
+input, select, textarea {color: white; border: 1px solid rgb(255, 255, 255); background: rgba(0, 0, 0, 0.8); padding: 5px;font-family: "Jersey 10", sans-serif; font-size: 20px;}
 
-button { padding: 5px; font-weight: 400; border: 1px solid white; background: black; transition: 0.2s; font-size: 20px;}
+button { padding: 5px; font-weight: 400; border: 1px solid white; background: black; transition: 0.2s; font-size: 20px; color: white;}
 button:hover {border: 1px solid greenyellow; background: green; cursor: pointer;}
 
 
