@@ -1,0 +1,130 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+body {
+  color: var(--foreground);
+  background: url(/img/bg.jpg) no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  font-family: "Jersey 10", sans-serif;
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0; font-weight: 400 !important; font-family: "Jersey 10", sans-serif; line-height: 1;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+main {padding: 50px; margin: 0 auto; max-width: 1500px;}
+h1 {font-size: 60px;}
+h2 {margin-bottom: 10px;color:white; font-size: 30px;}
+
+#char-stats {display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;}
+#char-stat {width: calc(50% - 10px); padding: 20px;}
+#char-stat:nth-child(1) {border: 2px solid rgb(0, 173, 0); background: rgba(0, 173, 0, 0.1);}
+#char-stat:nth-child(2) {border: 2px solid rgb(0, 195, 255); background: rgb(0, 195, 255,.1);}
+#char-stat:nth-child(3) {border: 2px solid rgb(204, 0, 255); background: rgb(204, 0, 255,.1);}
+#char-stat:nth-child(4) {border: 2px solid rgb(255, 102, 0); background: rgb(255, 102, 0,.1);}
+
+.soz-stats {padding: 20px; border: 2px solid grey; background: rgba(128, 128, 128, 0.1);}
+.soz-stat {display: flex; justify-content: space-between; column-gap: 40px; row-gap: 20px; flex-wrap: wrap;}
+.soz {width: calc(50% - 20px);}
+
+#add-stuff {display: flex; width: 100%; gap: 20px; margin-top: 20px;}
+#add-stuff section {padding: 20px; }
+#add-stuff section#addmon {flex:1; margin: 0; border: 2px solid rgb(255, 94, 54); background: rgba(255, 94, 54, 0.1);}
+#add-stuff section#addmon input, #add-stuff section#addmon select {border: 1px solid rgb(255, 94, 54);}
+#add-stuff section#items-container {flex:3; margin: 0;border: 2px solid rgb(121, 190, 255); background: rgba(121, 190, 255,.1);}
+
+input, select, textarea {border: 1px solid rgb(255, 255, 255); background: rgba(0, 0, 0, 0.8); padding: 5px;font-family: "Jersey 10", sans-serif; font-size: 20px;}
+
+button { padding: 5px; font-weight: 400; border: 1px solid white; background: black; transition: 0.2s; font-size: 20px;}
+button:hover {border: 1px solid greenyellow; background: green; cursor: pointer;}
+
+
+#mons {margin-top: 40px;}
+.mons {display: flex; flex-wrap: wrap; gap: 20px;}
+
+.pokemoncard {background: rgba(0, 0, 0, 0.5); padding: 10px 20px; flex: 1;}
+.pokemoncard button:disabled {background: rgba(255, 255, 255, 0.1); border: 1px solid green; color: white;}
+.card-header {display: flex; align-items: center;}
+.btn-close {border: 1px solid red;}
+.btn-close:hover {border: 1px solid red; background: rgba(255, 0, 0, 0.3);}
+
+#stats {margin: 10px 0; padding: 10px 0; border-top: 1px solid grey;border-bottom: 1px solid grey;}
+#stats td {padding: 5px;}
+#stats th {padding: 5px;}
+#stats tr:nth-child(odd) td {background: rgba(255, 255, 255, 0.1);}
+
+#moves td {padding: 5px;}
+#moves th {padding: 5px;}
+#moves tr:nth-child(odd) td {background: rgba(255, 255, 255, 0.1);}
+#small {font-size: 15px;}
+#lvl-hp {margin-top:10px; padding-top: 10px; border-top: 1px solid grey;}
+
+.pokemon-name {font-size: 24px;}
+
+#typ {margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid grey;}
+
+#uebersicht {margin: 40px 0; padding: 40px 0; border-top: 1px solid grey;border-bottom: 1px solid grey;}
+.trainerList {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.trainerList li {
+  font-size: 40px;          /* größer */
+  line-height: 1.5;
+  margin: 10px 0;
+  padding-left: 50px;       /* Platz für Icon */
+  position: relative;
+}
+
+.trainerList li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.22em;
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  /* Pokéball SVG */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23ffffff' stroke='%23111111' stroke-width='8'/%3E%3Cpath d='M 8 50 A 42 42 0 0 1 92 50 L 92 50 L 8 50 Z' fill='%23e53935'/%3E%3Cline x1='8' y1='50' x2='92' y2='50' stroke='%23111111' stroke-width='10'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23ffffff' stroke='%23111111' stroke-width='8'/%3E%3Ccircle cx='50' cy='50' r='6' fill='%23f2f2f2' stroke='%23111111' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.trainerList a {
+  text-decoration: none;
+}
+
+.trainerList a:hover {
+  text-decoration: underline;
+}
