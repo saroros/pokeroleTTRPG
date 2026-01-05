@@ -21,7 +21,60 @@ import ItemsBox from "./ItemsBox";
 import CharacterSheetDrawer from "./CharacterSheetDrawer";
 import Link from "next/link";
 import DeleteTrainerButton from "./DeleteTrainerButton";
+import ShowdownExportButton from "./ShowdownExportButton";
 
+function titleCaseWord(w: string) {
+  if (!w) return w;
+  return w[0].toUpperCase() + w.slice(1);
+}
+
+function showdownNameFromPokeApiName(name: string) {
+  // "geodude-alola" -> "Geodude-Alola"
+  return name
+    .split("-")
+    .map((p) => titleCaseWord(p))
+    .join("-");
+}
+
+function showdownMoveName(moveName: string) {
+  // "rock-smash" -> "Rock Smash"
+  return moveName
+    .split("-")
+    .map((p) => titleCaseWord(p))
+    .join(" ");
+}
+
+function buildShowdownExport(trainerName: string, activeMons: any[]) {
+
+  const blocks = activeMons.map((mon) => {
+    const baseName = showdownNameFromPokeApiName(mon.speciesName);
+    const nickname = (mon.nickname ?? "").trim();
+    const firstLine = nickname ? `${nickname} (${baseName})` : `${baseName}`;
+
+    const lines: string[] = [firstLine];
+
+    // optional: Ability, Item etc. (nur wenn du es später speicherst)
+    // if (mon.abilityName) lines.push(`Ability: ${mon.abilityName}`);
+
+    lines.push(`Level: ${mon.level ?? 1}`);
+
+    // Tera Type: wenn du willst, nimm den ersten Typ als placeholder
+    if (Array.isArray(mon.types) && mon.types.length > 0) {
+      lines.push(`Tera Type: ${titleCaseWord(mon.types[0])}`);
+    }
+
+    const moves = (mon.moves ?? []).slice(0, 4);
+    for (const m of moves) {
+      const mvName = typeof m === "string" ? m : (m?.name ?? "");
+      if (!mvName) continue;
+      lines.push(`- ${showdownMoveName(mvName)}`);
+    }
+
+    return lines.join("\n");
+  });
+
+  return blocks.join("\n\n") + "\n";
+}
 
 function StatTable({
   trainerSlug,
@@ -465,6 +518,7 @@ export default async function TrainerPage({
   const active = trainer.pokemons.filter((p) => p.status === "ACTIVE");
   const box = trainer.pokemons.filter((p) => p.status === "BOX");
   const dead = trainer.pokemons.filter((p) => p.status === "DEAD");
+  const showdownText = buildShowdownExport(trainer.name, active);
 
   return (
     <main>
@@ -519,9 +573,11 @@ export default async function TrainerPage({
       <section id="pokebox">
         <div id="mons">
           <h2>Party (Active)</h2>
+         
           <div className="mons">
             {active.map((m) => <PokemonCard key={m.id} trainerSlug={trainer.slug} mon={m} />)}
           </div>
+           <ShowdownExportButton text={showdownText} />
         </div>
         <div id="mons">
           <h2>Box</h2>

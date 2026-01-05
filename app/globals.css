@@ -46,7 +46,7 @@ h1 {font-size: 60px;}
 h2 {margin-bottom: 10px;color:white; font-size: 30px;}
 
 #char-stats {display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;}
-#char-stat {width: calc(50% - 10px); padding: 20px;}
+#char-stat {width: calc(50% - 10px); padding: 20px; min-width: 320px;}
 #char-stat:nth-child(1) {border: 2px solid rgb(0, 173, 0); background: rgba(0, 173, 0, 0.1);}
 #char-stat:nth-child(2) {border: 2px solid rgb(0, 195, 255); background: rgb(0, 195, 255,.1);}
 #char-stat:nth-child(3) {border: 2px solid rgb(204, 0, 255); background: rgb(204, 0, 255,.1);}
@@ -56,11 +56,14 @@ h2 {margin-bottom: 10px;color:white; font-size: 30px;}
 .soz-stat {display: flex; justify-content: space-between; column-gap: 40px; row-gap: 20px; flex-wrap: wrap;}
 .soz {width: calc(50% - 20px);}
 
-#add-stuff {display: flex; width: 100%; gap: 20px; margin-top: 20px;}
+#add-stuff {display: flex; width: 100%; gap: 20px; margin-top: 20px; flex-wrap: wrap;}
 #add-stuff section {padding: 20px; }
 #add-stuff section#addmon {flex:1; margin: 0; border: 2px solid rgb(255, 94, 54); background: rgba(255, 94, 54, 0.1);}
 #add-stuff section#addmon input, #add-stuff section#addmon select {border: 1px solid rgb(255, 94, 54);}
 #add-stuff section#items-container {flex:3; margin: 0;border: 2px solid rgb(121, 190, 255); background: rgba(121, 190, 255,.1);}
+
+
+
 
 input, select, textarea {color: white; border: 1px solid rgb(255, 255, 255); background: rgba(0, 0, 0, 0.8); padding: 5px;font-family: "Jersey 10", sans-serif; font-size: 20px;}
 
