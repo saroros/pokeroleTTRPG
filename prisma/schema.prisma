@@ -85,3 +85,15 @@ model FightEntry {
 
   pokemon PokemonInstance @relation("PokemonFightEntry", fields: [pokemonId], references: [id], onDelete: Cascade)
 }
+model FightConfig {
+  id                 String   @id @default("global")
+
+  // neu (Upload)
+  headerImageDataUrl String   @default("") @db.Text
+
+  // alt (lassen wir drin, damit keine Drops passieren)
+  headerImageUrl     String   @default("")
+  headerImageUrl2    String   @default("")
+
+  updatedAt          DateTime @updatedAt
+}
